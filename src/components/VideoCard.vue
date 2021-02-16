@@ -44,7 +44,10 @@ export default {
       type: Object,
       required: true,
     },
-    card: Object,
+    card: {
+      type: Object,
+      required: true,
+    },
   },
 };
 </script>
