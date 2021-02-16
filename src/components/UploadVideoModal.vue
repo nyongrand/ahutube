@@ -6,7 +6,7 @@
     max-width="1000"
   >
     <v-card>
-      <div class="d-flex justify-space-between mb-5" id="modal-header">
+      <div id="modal-header" class="d-flex justify-space-between mb-5">
         <v-card-title class="py-3">Upload Video</v-card-title>
         <div class="mt-3 mr-2">
           <v-btn text>
@@ -36,25 +36,25 @@
           </div>
 
           <ValidationProvider
-            rules="required|size:5000"
             v-slot="{ errors }"
-            name="file"
             ref="provider"
+            rules="required|size:5000"
+            name="file"
           >
             <v-file-input
-              @change="uploadVideo"
+              ref="fileInput"
               accept="video/mp4"
               placeholder="Pick an video"
               prepend-icon="mdi-video"
               :error-messages="errors"
-              ref="fileInput"
+              @change="uploadVideo"
             ></v-file-input>
           </ValidationProvider>
           <v-btn
             type="submit"
             depressed
-            @click="$refs.fileInput.$refs.input.click()"
             class="blue darken-3 flat white--text mt-4"
+            @click="$refs.fileInput.$refs.input.click()"
             >Select File</v-btn
           >
         </div>
@@ -111,6 +111,7 @@
                   rules="required|min:3"
                 >
                   <v-textarea
+                    v-model="formData.description"
                     filled
                     auto-grow
                     :error-messages="errors"
@@ -119,7 +120,6 @@
                     rows="5"
                     counter="5000"
                     max-length="5000"
-                    v-model="formData.description"
                     row-height="20"
                   ></v-textarea>
                 </ValidationProvider>
@@ -129,11 +129,11 @@
                   rules="required|min:3"
                 >
                   <v-select
+                    v-model="formData.visibilty"
                     :items="visibilty"
                     :error-messages="errors"
                     filled
                     label="Visibilty"
-                    v-model="formData.visibilty"
                   ></v-select>
                 </ValidationProvider>
                 <ValidationProvider
@@ -142,11 +142,11 @@
                   rules="required|min:3"
                 >
                   <v-select
+                    v-model="formData.category"
                     :items="categories"
                     :error-messages="errors"
                     filled
                     label="Categories"
-                    v-model="formData.category"
                   ></v-select>
                 </ValidationProvider>
 
@@ -166,18 +166,18 @@
           >
             <v-btn text @click="toggleShow">Upload Thumbnails</v-btn>
             <my-upload
-              field="img"
-              @crop-success="cropSuccess"
               v-model="show"
+              field="img"
               :width="400"
               :height="400"
               :params="params"
               :headers="headers"
               img-format="jpg"
-              langType="en"
+              lang-type="en"
+              @crop-success="cropSuccess"
             ></my-upload>
             <v-responsive width="330" class="mx-auto">
-              <div v-if="!imgDataUrl" class="px-12" id="image-placeholder">
+              <div v-if="!imgDataUrl" id="image-placeholder" class="px-12">
                 <v-icon>mdi-image-plus</v-icon>
               </div>
               <v-img
@@ -202,10 +202,13 @@
 </template>
 
 <script>
-import myUpload from 'vue-image-crop-upload'
+import myUpload from "vue-image-crop-upload";
 export default {
-  name: 'UploadModal',
-  props: ['openDialog'],
+  name: "UploadModal",
+  components: {
+    myUpload,
+  },
+  props: ["openDialog"],
   data: function() {
     return {
       // dialog: this.openDialog ? this.openDialog : false,
@@ -219,73 +222,70 @@ export default {
         (value) =>
           !value ||
           value.size < 5000000 ||
-          'Video size should be less than 5 MB!'
+          "Video size should be less than 5 MB!",
       ],
-      categories: ['People', 'Technology', 'Fashion'],
-      visibilty: ['Public', 'Private'],
+      categories: ["People", "Technology", "Fashion"],
+      visibilty: ["Public", "Private"],
       formData: {
-        title: '',
-        description: '',
-        category: '',
-        visibilty: ''
+        title: "",
+        description: "",
+        category: "",
+        visibilty: "",
       },
-      imgDataUrl: '',
+      imgDataUrl: "",
       params: {
-        token: '123456798',
-        name: 'avatar'
+        token: "123456798",
+        name: "avatar",
       },
       headers: {
-        smail: '*_~'
-      }
-    }
+        smail: "*_~",
+      },
+    };
   },
   computed: {
     dialog() {
-      return this.openDialog
-    }
+      return this.openDialog;
+    },
   },
   methods: {
     async uploadVideo(e) {
-      const { valid } = await this.$refs.provider.validate(e)
+      const { valid } = await this.$refs.provider.validate(e);
 
-      if (!valid) return
+      if (!valid) return;
       // TODO: Upload the file
-      this.uploading = true
+      this.uploading = true;
       this.interval = setInterval(() => {
         if (this.value === 100) {
-          this.uploaded = true
-          clearInterval(this.interval)
+          this.uploaded = true;
+          clearInterval(this.interval);
         }
-        this.value += 10
-      }, 1000)
+        this.value += 10;
+      }, 1000);
       // }
       // }
     },
     submit() {
-      if (this.$route.name === 'Dashboard')
-        return this.$router.push('/studio/videos')
-      console.log('submittied')
-      this.closeModal()
+      if (this.$route.name === "Dashboard")
+        return this.$router.push("/studio/videos");
+      console.log("submittied");
+      this.closeModal();
     },
     closeModal() {
-      this.$emit('closeDialog')
+      this.$emit("closeDialog");
     },
     selectFile() {
-      this.$refs.fileInput.$refs.input.click()
+      this.$refs.fileInput.$refs.input.click();
     },
     toggleShow() {
-      this.show = !this.show
+      this.show = !this.show;
     },
     cropSuccess(imgDataUrl, field) {
-      console.log('-------- crop success --------')
-      console.log(field)
-      this.imgDataUrl = imgDataUrl
-    }
+      console.log("-------- crop success --------");
+      console.log(field);
+      this.imgDataUrl = imgDataUrl;
+    },
   },
-  components: {
-    myUpload
-  }
-}
+};
 </script>
 
 <style lang="scss">

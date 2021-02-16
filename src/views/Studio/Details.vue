@@ -32,6 +32,7 @@
                 rules="required|min:3"
               >
                 <v-textarea
+                  v-model="formData.description"
                   filled
                   auto-grow
                   :error-messages="errors"
@@ -40,7 +41,6 @@
                   rows="5"
                   counter="5000"
                   max-length="5000"
-                  v-model="formData.description"
                   row-height="20"
                 ></v-textarea>
               </ValidationProvider>
@@ -50,11 +50,11 @@
                 rules="required|min:3"
               >
                 <v-select
+                  v-model="formData.visibilty"
                   :items="visibilty"
                   :error-messages="errors"
                   filled
                   label="Visibilty"
-                  v-model="formData.visibilty"
                 ></v-select>
               </ValidationProvider>
               <ValidationProvider
@@ -63,11 +63,11 @@
                 rules="required|min:3"
               >
                 <v-select
+                  v-model="formData.category"
                   :items="categories"
                   :error-messages="errors"
                   filled
                   label="Categories"
-                  v-model="formData.category"
                 ></v-select>
               </ValidationProvider>
 
@@ -80,18 +80,18 @@
         <v-col cols="4" class="text-center">
           <v-btn text @click="toggleShow">Upload Thumbnails</v-btn>
           <my-upload
-            field="img"
-            @crop-success="cropSuccess"
             v-model="show"
+            field="img"
             :width="400"
             :height="400"
             :params="params"
             :headers="headers"
             img-format="jpg"
-            langType="en"
+            lang-type="en"
+            @crop-success="cropSuccess"
           ></my-upload>
           <v-responsive style="max-width: 100%">
-            <div v-if="!imgDataUrl" class="px-12" id="image-placeholder">
+            <div v-if="!imgDataUrl" id="image-placeholder" class="px-12">
               <v-icon>mdi-image-plus</v-icon>
             </div>
             <v-img v-else height="350" :src="imgDataUrl"></v-img>
@@ -103,9 +103,12 @@
 </template>
 
 <script>
-import myUpload from 'vue-image-crop-upload'
+import myUpload from "vue-image-crop-upload";
 export default {
-  name: 'Details',
+  name: "Details",
+  components: {
+    myUpload,
+  },
   data() {
     return {
       // dialog: this.openDialog ? this.openDialog : false,
@@ -119,45 +122,42 @@ export default {
         (value) =>
           !value ||
           value.size < 5000000 ||
-          'Video size should be less than 5 MB!'
+          "Video size should be less than 5 MB!",
       ],
-      categories: ['People', 'Technology', 'Fashion'],
-      visibilty: ['Public', 'Private'],
+      categories: ["People", "Technology", "Fashion"],
+      visibilty: ["Public", "Private"],
       formData: {
-        title: '',
-        description: '',
-        category: '',
-        visibilty: ''
+        title: "",
+        description: "",
+        category: "",
+        visibilty: "",
       },
-      imgDataUrl: 'https://cdn.vuetifyjs.com/images/cards/docks.jpg',
+      imgDataUrl: "https://cdn.vuetifyjs.com/images/cards/docks.jpg",
       params: {
-        token: '123456798',
-        name: 'avatar'
+        token: "123456798",
+        name: "avatar",
       },
       headers: {
-        smail: '*_~'
-      }
-    }
+        smail: "*_~",
+      },
+    };
   },
+  mounted() {},
   methods: {
     submit() {
-      console.log('submittied')
-      this.closeModal()
+      console.log("submittied");
+      this.closeModal();
     },
     toggleShow() {
-      this.show = !this.show
+      this.show = !this.show;
     },
     cropSuccess(imgDataUrl, field) {
-      console.log('-------- crop success --------')
-      console.log(field)
-      this.imgDataUrl = imgDataUrl
-    }
+      console.log("-------- crop success --------");
+      console.log(field);
+      this.imgDataUrl = imgDataUrl;
+    },
   },
-  components: {
-    myUpload
-  },
-  mounted() {}
-}
+};
 </script>
 
 <style lang="scss">

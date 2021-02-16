@@ -9,19 +9,19 @@
       >
       <v-spacer></v-spacer>
       <v-text-field
+        v-model="searchText"
         flat
         hide-details
         append-icon="mdi-magnify"
         placeholder="Search"
         outlined
         dense
-        v-model="searchText"
-        @click:append="search"
         class="hidden-sm-and-down"
+        @click:append="search"
       ></v-text-field>
 
       <v-spacer></v-spacer>
-      <v-menu offsetY>
+      <v-menu offset-y>
         <template v-slot:activator="{ on: menu }">
           <v-tooltip bottom>
             <template v-slot:activator="{ on: tooltip }">
@@ -56,7 +56,7 @@
       </v-tooltip>
       <v-tooltip bottom>
         <template v-slot:activator="{ on }">
-          <v-btn icon v-on="on" class="mr-7">
+          <v-btn icon class="mr-7" v-on="on">
             <v-icon size="25">mdi-bell</v-icon></v-btn
           >
         </template>
@@ -65,7 +65,7 @@
 
       <v-menu offset-y left>
         <template v-slot:activator="{ on }">
-          <v-btn small color="red" depressed fab v-on="on" class="white--text">
+          <v-btn small color="red" depressed fab class="white--text" v-on="on">
             T
           </v-btn>
         </template>
@@ -113,22 +113,22 @@
     </v-app-bar>
 
     <v-navigation-drawer
+      id="nav"
       v-model="drawer"
       app
       :clipped="$route.name !== 'Watch'"
       :temporary="$route.name === 'Watch'"
-      id="nav"
     >
-      <div tag="div" class="v-navigation-drawer__content" v-bar>
+      <div v-bar tag="div" class="v-navigation-drawer__content">
         <v-list dense nav class="py-0" tag="div">
           <v-list-item
             :class="{
-              'hidden-lg-and-up': $route.name === 'Watch' ? false : true
+              'hidden-lg-and-up': $route.name === 'Watch' ? false : true,
             }"
           >
             <v-app-bar-nav-icon
-              @click="drawer = !drawer"
               class="mr-5"
+              @click="drawer = !drawer"
             ></v-app-bar-nav-icon>
             <v-toolbar-title class="font-weight-bold">VueTube</v-toolbar-title>
           </v-list-item>
@@ -192,147 +192,147 @@ export default {
       {
         header: null,
         pages: [
-          { title: 'Home', link: '/', icon: 'mdi-home' },
-          { title: 'Trending', link: '/trending', icon: 'mdi-fire' },
+          { title: "Home", link: "/", icon: "mdi-home" },
+          { title: "Trending", link: "/trending", icon: "mdi-fire" },
           {
-            title: 'Subscriptions',
-            link: '#s',
-            icon: 'mdi-youtube-subscription'
-          }
-        ]
+            title: "Subscriptions",
+            link: "#s",
+            icon: "mdi-youtube-subscription",
+          },
+        ],
       },
       {
         header: null,
         pages: [
           {
-            title: 'Library',
-            link: '#l',
-            icon: 'mdi-play-box-multiple'
+            title: "Library",
+            link: "#l",
+            icon: "mdi-play-box-multiple",
           },
           {
-            title: 'History',
-            link: '/history',
-            icon: 'mdi-history'
+            title: "History",
+            link: "/history",
+            icon: "mdi-history",
           },
           {
-            title: 'Your videos',
-            link: '/channels/ddd',
-            icon: 'mdi-play-box-outline'
-          },
-
-          {
-            title: 'Watch later',
-            link: '#wl',
-            icon: 'mdi-clock'
+            title: "Your videos",
+            link: "/channels/ddd",
+            icon: "mdi-play-box-outline",
           },
 
           {
-            title: 'Liked videos',
-            link: '#lw',
-            icon: 'mdi-thumb-up'
-          }
-        ]
+            title: "Watch later",
+            link: "#wl",
+            icon: "mdi-clock",
+          },
+
+          {
+            title: "Liked videos",
+            link: "#lw",
+            icon: "mdi-thumb-up",
+          },
+        ],
       },
       {
-        header: 'Subscriptions',
+        header: "Subscriptions",
         pages: [
           {
-            title: 'Traversy Media',
-            link: '#tm',
-            icon: 'mdi-badge-account'
+            title: "Traversy Media",
+            link: "#tm",
+            icon: "mdi-badge-account",
           },
           {
-            title: 'The New Boston',
-            link: '#tn',
-            icon: 'mdi-badge-account'
+            title: "The New Boston",
+            link: "#tn",
+            icon: "mdi-badge-account",
           },
           {
-            title: 'Net Ninija',
-            link: '#nn',
-            icon: 'mdi-badge-account'
+            title: "Net Ninija",
+            link: "#nn",
+            icon: "mdi-badge-account",
           },
           {
-            title: 'Chris Hawks',
-            link: '#ch',
-            icon: 'mdi-badge-account'
-          }
-        ]
+            title: "Chris Hawks",
+            link: "#ch",
+            icon: "mdi-badge-account",
+          },
+        ],
       },
       {
-        header: 'MORE FROM VUETUBE',
+        header: "MORE FROM VUETUBE",
         pages: [
           {
-            title: 'VueTube Premium',
-            link: '#vp',
-            icon: 'mdi-youtube'
+            title: "VueTube Premium",
+            link: "#vp",
+            icon: "mdi-youtube",
           },
           {
-            title: 'Gaming',
-            link: '#g',
-            icon: 'mdi-youtube-gaming'
+            title: "Gaming",
+            link: "#g",
+            icon: "mdi-youtube-gaming",
           },
           {
-            title: 'Live',
-            link: '#li',
-            icon: 'mdi-access-point'
-          }
-        ]
+            title: "Live",
+            link: "#li",
+            icon: "mdi-access-point",
+          },
+        ],
       },
       {
         header: null,
         pages: [
           {
-            title: 'Setting',
-            link: '#sg',
-            icon: 'mdi-cog'
+            title: "Setting",
+            link: "#sg",
+            icon: "mdi-cog",
           },
           {
-            title: 'Report history',
-            link: '#rh',
-            icon: 'mdi-flag'
+            title: "Report history",
+            link: "#rh",
+            icon: "mdi-flag",
           },
           {
-            title: 'Help',
-            link: '#hp',
-            icon: 'mdi-help-circle'
+            title: "Help",
+            link: "#hp",
+            icon: "mdi-help-circle",
           },
           {
-            title: 'Send feedback',
-            link: '#f',
-            icon: 'mdi-message-alert'
-          }
-        ]
-      }
+            title: "Send feedback",
+            link: "#f",
+            icon: "mdi-message-alert",
+          },
+        ],
+      },
     ],
     links: [
-      { text: 'About', link: '#' },
-      { text: 'Press', link: '#' },
-      { text: 'Copyrignt', link: '#' },
-      { text: 'Contact us', link: '#' },
-      { text: 'Creators', link: '#' },
-      { text: 'Advertise', link: '#' },
-      { text: 'Developers', link: '#' },
-      { text: 'Terms', link: '#' },
-      { text: 'Privacy', link: '#' },
-      { text: 'Policy & Safety', link: '#' },
-      { text: 'Test new features', link: '#' }
+      { text: "About", link: "#" },
+      { text: "Press", link: "#" },
+      { text: "Copyrignt", link: "#" },
+      { text: "Contact us", link: "#" },
+      { text: "Creators", link: "#" },
+      { text: "Advertise", link: "#" },
+      { text: "Developers", link: "#" },
+      { text: "Terms", link: "#" },
+      { text: "Privacy", link: "#" },
+      { text: "Policy & Safety", link: "#" },
+      { text: "Test new features", link: "#" },
     ],
-    searchText: ''
+    searchText: "",
   }),
+  mounted() {
+    this.drawer = this.$vuetify.breakpoint.mdAndDown ? false : true;
+    this.drawer = this.$route.name === "Watch" ? false : this.drawer;
+  },
   methods: {
     search() {
-      if (!this.searchText) return
+      if (!this.searchText) return;
       this.$router.push({
-        name: 'Search',
-        query: { 'search-query': this.searchText }
-      })
-    }
+        name: "Search",
+        query: { "search-query": this.searchText },
+      });
+    },
   },
-  mounted() {
-    this.drawer = this.$vuetify.breakpoint.mdAndDown ? false : true
-    this.drawer = this.$route.name === 'Watch' ? false : this.drawer
-  }
-}
+};
 </script>
 
 <style lang="scss">

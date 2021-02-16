@@ -51,54 +51,54 @@
 
 <script>
 export default {
-  name: 'SubscribersModal',
-  props: ['openDialog'],
+  name: "SubscribersModal",
+  props: ["openDialog"],
   data: function() {
     return {
       headers: [
         {
-          text: 'Channel',
-          align: 'start',
-          value: 'channelName'
+          text: "Channel",
+          align: "start",
+          value: "channelName",
         },
-        { text: 'Date Subscribed', value: 'createdAt' },
-        { text: 'Subcriber count', value: 'subscribers' },
-        { text: 'Actions', value: 'actions', align: 'end', sortable: false }
+        { text: "Date Subscribed", value: "createdAt" },
+        { text: "Subcriber count", value: "subscribers" },
+        { text: "Actions", value: "actions", align: "end", sortable: false },
       ],
-      subscribers: []
-    }
+      subscribers: [],
+    };
   },
   computed: {
     dialog() {
-      return this.openDialog
-    }
+      return this.openDialog;
+    },
+  },
+  mounted() {
+    this.initialize();
   },
   methods: {
     initialize() {
       this.subscribers = [
         {
-          channelName: 'Brad Traversy',
-          avatar: 'https://cdn.vuetifyjs.com/images/john.jpg',
-          createdAt: 'Apr 20, 2020',
-          subscribers: 5
+          channelName: "Brad Traversy",
+          avatar: "https://cdn.vuetifyjs.com/images/john.jpg",
+          createdAt: "Apr 20, 2020",
+          subscribers: 5,
         },
         {
-          channelName: 'John Doe',
-          avatar: 'https://cdn.vuetifyjs.com/images/john.jpg',
-          createdAt: 'Apr 20, 2020',
-          subscribers: 10
-        }
-      ]
+          channelName: "John Doe",
+          avatar: "https://cdn.vuetifyjs.com/images/john.jpg",
+          createdAt: "Apr 20, 2020",
+          subscribers: 10,
+        },
+      ];
     },
     subscribe(item) {
-      console.log(item)
+      console.log(item);
     },
     closeModal() {
-      this.$emit('closeDialog')
-    }
+      this.$emit("closeDialog");
+    },
   },
-  mounted() {
-    this.initialize()
-  }
-}
+};
 </script>

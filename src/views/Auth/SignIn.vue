@@ -69,17 +69,17 @@
 
 <script>
 export default {
-  name: 'SignIn',
+  name: "SignIn",
   data: () => ({
-    email: '',
-    password: ''
+    email: "",
+    password: "",
   }),
   methods: {
     signin() {
-      console.log('hello')
-    }
-  }
-}
+      console.log("hello");
+    },
+  },
+};
 </script>
 
 <style></style>

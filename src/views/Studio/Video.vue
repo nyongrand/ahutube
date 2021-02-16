@@ -4,7 +4,7 @@
     <h2>channel videos</h2>
 
     <!-- <v-row> -->
-    <v-tabs v-model="tab" id="tab" class="mt-5">
+    <v-tabs id="tab" v-model="tab" class="mt-5">
       <v-tab>
         Uploads
       </v-tab>
@@ -129,73 +129,73 @@ export default {
     loading: true,
     dialogDelete: false,
     tab: null,
-    search: '',
+    search: "",
     headers: [
       {
-        text: 'Video',
-        align: 'start',
-        value: 'name'
+        text: "Video",
+        align: "start",
+        value: "name",
       },
-      { text: 'Visibility', value: 'visibility' },
-      { text: 'Restrictions', value: 'restrictions' },
-      { text: 'Views', value: 'views' },
-      { text: 'Comments', value: 'comments' },
-      { text: 'Likes (vs. dislikes)', value: 'likes (vs. dislikes)' },
-      { text: 'Actions', value: 'actions', sortable: false }
+      { text: "Visibility", value: "visibility" },
+      { text: "Restrictions", value: "restrictions" },
+      { text: "Views", value: "views" },
+      { text: "Comments", value: "comments" },
+      { text: "Likes (vs. dislikes)", value: "likes (vs. dislikes)" },
+      { text: "Actions", value: "actions", sortable: false },
     ],
     videos: [],
-    itemToDelete: {}
+    itemToDelete: {},
   }),
-  methods: {
-    editItem(item) {
-      this.$router.push({ name: `Detail`, params: { id: item.id } })
-    },
-    deleteBtn(item) {
-      this.dialogDelete = true
-      this.itemToDelete = item
-    },
-    deleteItem() {
-      this.dialogDelete = false
-      this.videos = this.videos.filter(
-        (video) => this.itemToDelete.id !== video.id
-      )
-    }
-  },
   mounted() {
     setTimeout(() => {
-      this.loading = false
+      this.loading = false;
       this.videos = [
         {
-          'name': 'Day 44',
-          'visibility': 'public',
-          'restrictions': 'none',
-          'views': 10,
-          'comments': 5,
-          'likes (vs. dislikes)': 10,
-          'id': 12233
+          name: "Day 44",
+          visibility: "public",
+          restrictions: "none",
+          views: 10,
+          comments: 5,
+          "likes (vs. dislikes)": 10,
+          id: 12233,
         },
         {
-          'name': 'Day 45',
-          'visibility': 'public',
-          'restrictions': 'none',
-          'views': 13,
-          'comments': 15,
-          'likes (vs. dislikes)': 20,
-          'id': 12234
+          name: "Day 45",
+          visibility: "public",
+          restrictions: "none",
+          views: 13,
+          comments: 15,
+          "likes (vs. dislikes)": 20,
+          id: 12234,
         },
         {
-          'name': 'Day 46',
-          'visibility': 'public',
-          'restrictions': 'none',
-          'views': 10,
-          'comments': 45,
-          'likes (vs. dislikes)': 60,
-          'id': 122133
-        }
-      ]
-    }, 2000)
-  }
-}
+          name: "Day 46",
+          visibility: "public",
+          restrictions: "none",
+          views: 10,
+          comments: 45,
+          "likes (vs. dislikes)": 60,
+          id: 122133,
+        },
+      ];
+    }, 2000);
+  },
+  methods: {
+    editItem(item) {
+      this.$router.push({ name: `Detail`, params: { id: item.id } });
+    },
+    deleteBtn(item) {
+      this.dialogDelete = true;
+      this.itemToDelete = item;
+    },
+    deleteItem() {
+      this.dialogDelete = false;
+      this.videos = this.videos.filter(
+        (video) => this.itemToDelete.id !== video.id
+      );
+    },
+  },
+};
 </script>
 
 <style lang="scss">

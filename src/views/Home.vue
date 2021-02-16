@@ -4,12 +4,12 @@
       <h3 class="headline font-weight-medium">Recommended</h3>
       <v-row>
         <v-col
+          v-for="i in loading ? 10 : 12"
+          :key="i"
           cols="12"
           sm="6"
           md="4"
           lg="3"
-          v-for="i in loading ? 10 : 12"
-          :key="i"
           class="mx-xs-auto"
         >
           <v-skeleton-loader type="card-avatar" :loading="loading">
@@ -63,33 +63,33 @@
 </template>
 
 <script>
-import videoCard from '@/components/VideoCard'
+import videoCard from "@/components/VideoCard";
 
 export default {
-  name: 'Home',
+  name: "Home",
+  components: {
+    videoCard,
+  },
   data: () => ({
     loading: true,
     video: {
-      url: '/watch/12',
-      thumb: 'https://cdn.vuetifyjs.com/images/cards/sunshine.jpg',
-      title: 'Top western road trips',
-      views: '9.6k',
-      createdAt: '6 hours ago'
+      url: "/watch/12",
+      thumb: "https://cdn.vuetifyjs.com/images/cards/sunshine.jpg",
+      title: "Top western road trips",
+      views: "9.6k",
+      createdAt: "6 hours ago",
     },
     channel: {
-      url: '/channels/12',
-      avatar: 'https://randomuser.me/api/portraits/men/1.jpg'
-    }
+      url: "/channels/12",
+      avatar: "https://randomuser.me/api/portraits/men/1.jpg",
+    },
   }),
-  components: {
-    videoCard
-  },
   mounted() {
     setTimeout(() => {
-      this.loading = false
-    }, 3000)
-  }
-}
+      this.loading = false;
+    }, 3000);
+  },
+};
 </script>
 
 <style lang="scss">

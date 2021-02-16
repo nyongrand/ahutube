@@ -66,8 +66,8 @@
                           rules="required"
                         >
                           <v-text-field
-                            type="password"
                             v-model="confirmPassword"
+                            type="password"
                             :error-messages="errors"
                             label="Confirm"
                             outlined
@@ -225,19 +225,19 @@
 
 <script>
 export default {
-  name: 'SignUp',
+  name: "SignUp",
   data: () => ({
-    email: '',
-    channelName: '',
-    password: '',
-    confirmPassword: ''
+    email: "",
+    channelName: "",
+    password: "",
+    confirmPassword: "",
   }),
   methods: {
     signin() {
-      console.log('hello')
-    }
-  }
-}
+      console.log("hello");
+    },
+  },
+};
 </script>
 
 <style></style>

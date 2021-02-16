@@ -105,12 +105,14 @@
           lg="5"
           :class="[
             'pa-0',
-            { 'fill-height': $vuetify.breakpoint.name.smAndDown ? true : false }
+            {
+              'fill-height': $vuetify.breakpoint.name.smAndDown ? true : false,
+            },
           ]"
         >
           <v-card
-            flat
             id="card-radiobox"
+            flat
             class="fill-height grey lighten-4 pa-10"
           >
             <v-radio-group v-model="historyType">
@@ -120,8 +122,8 @@
                   <template v-for="(item, i) in items">
                     <v-divider :key="i"></v-divider>
                     <v-list-item
-                      active-class="grey lighten-4"
                       :key="`item-${i}`"
+                      active-class="grey lighten-4"
                       class="py-2"
                       @click="clickItem(item)"
                     >
@@ -155,28 +157,28 @@ export default {
     loading: true,
     searchTextsLoading: true,
     items: [
-      'Watch History',
-      'Search History',
-      'Community',
-      'Comments',
-      'Live Chat'
+      "Watch History",
+      "Search History",
+      "Community",
+      "Comments",
+      "Live Chat",
     ],
-    historyType: 'Watch History'
+    historyType: "Watch History",
   }),
+  mounted() {
+    setTimeout(() => {
+      this.loading = false;
+      this.searchTextsLoading = false;
+    }, 2000);
+  },
 
   methods: {
     clickItem(item) {
-      console.log(item)
-      this.historyType = item
-    }
+      console.log(item);
+      this.historyType = item;
+    },
   },
-  mounted() {
-    setTimeout(() => {
-      this.loading = false
-      this.searchTextsLoading = false
-    }, 2000)
-  }
-}
+};
 </script>
 
 <style lang="scss" scoped></style>

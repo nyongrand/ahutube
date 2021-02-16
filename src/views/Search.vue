@@ -11,7 +11,7 @@
               tile
               large
             >
-              <v-card class="card mb-10" tile flat v-if="i < 5">
+              <v-card v-if="i < 5" class="card mb-10" tile flat>
                 <v-row no-gutters justify="center">
                   <v-col cols="10" sm="10" md="3" lg="3" class="d-flex">
                     <!-- <v-responsive max-height="100%"> -->
@@ -55,7 +55,7 @@
                   </v-col>
                 </v-row>
               </v-card>
-              <v-card class="card mb-10" tile flat v-else>
+              <v-card v-else class="card mb-10" tile flat>
                 <v-row no-gutters>
                   <v-col cols="5" sm="3" md="3" lg="3">
                     <!-- <v-responsive max-height="100%"> -->
@@ -101,14 +101,14 @@
 <script>
 export default {
   data: () => ({
-    loading: true
+    loading: true,
   }),
   mounted() {
     setTimeout(() => {
-      this.loading = false
-    }, 3000)
-  }
-}
+      this.loading = false;
+    }, 3000);
+  },
+};
 </script>
 
 <style></style>

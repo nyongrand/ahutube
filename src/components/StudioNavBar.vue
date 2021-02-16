@@ -18,13 +18,13 @@
         placeholder="Search"
         outlined
         dense
-        @click:append="search"
         class="hidden-sm-and-down"
+        @click:append="search"
       ></v-text-field>
       <!-- <v-toolbar-title>Page title</v-toolbar-title> -->
 
       <v-spacer></v-spacer>
-      <v-menu offsetY>
+      <v-menu offset-y>
         <template v-slot:activator="{ on: menu }">
           <v-tooltip bottom>
             <template v-slot:activator="{ on: tooltip }">
@@ -59,7 +59,7 @@
 
       <v-menu offset-y left>
         <template v-slot:activator="{ on }">
-          <v-btn small color="red" depressed fab v-on="on" class="white--text">
+          <v-btn small color="red" depressed fab class="white--text" v-on="on">
             T
           </v-btn>
         </template>
@@ -106,8 +106,8 @@
       </v-menu>
     </v-app-bar>
 
-    <v-navigation-drawer v-model="drawer" clipped app id="nav">
-      <div tag="div" class="v-navigation-drawer__content" v-bar>
+    <v-navigation-drawer id="nav" v-model="drawer" clipped app>
+      <div v-bar tag="div" class="v-navigation-drawer__content">
         <v-list tile class="py-0">
           <v-list-item
             v-for="item in items[0].pages"
@@ -142,9 +142,9 @@
               link
               class="mb-0"
               :to="item.link === '' ? '' : item.link"
-              @click="settingsMoal(item.title)"
               exact
               active-class="active-item"
+              @click="settingsMoal(item.title)"
             >
               <v-list-item-icon>
                 <v-icon>{{ item.icon }}</v-icon>
@@ -190,111 +190,108 @@
         </div>
       </template>
     </v-navigation-drawer>
-    <upload-video-modal
-      :open-dialog="dialog"
-      v-on:closeDialog="dialog = false"
-    />
+    <upload-video-modal :open-dialog="dialog" @closeDialog="dialog = false" />
     <settings-modal
       :open-dialog="settingsDialog"
-      v-on:closeDialog="settingsDialog = false"
+      @closeDialog="settingsDialog = false"
     />
   </nav>
 </template>
 
 <script>
-import UploadVideoModal from '@/components/UploadVideoModal'
-import SettingsModal from '@/components/SettingsModal'
+import UploadVideoModal from "@/components/UploadVideoModal";
+import SettingsModal from "@/components/SettingsModal";
 export default {
-  name: 'StudioNavBar',
+  name: "StudioNavBar",
+  components: {
+    UploadVideoModal,
+    SettingsModal,
+  },
   data: () => ({
     drawer: false,
     items: [
       {
-        header: 'scroll',
+        header: "scroll",
         pages: [
-          { title: 'Dashboard', link: '/studio', icon: 'mdi-view-dashboard' },
+          { title: "Dashboard", link: "/studio", icon: "mdi-view-dashboard" },
           {
-            title: 'Videos',
-            link: '/studio/videos',
-            icon: 'mdi-play-box-multiple'
+            title: "Videos",
+            link: "/studio/videos",
+            icon: "mdi-play-box-multiple",
           },
           {
-            title: 'Playlists',
-            link: '#p',
-            icon: 'mdi-playlist-play'
+            title: "Playlists",
+            link: "#p",
+            icon: "mdi-playlist-play",
           },
           {
-            title: 'Analytics',
-            link: '#a',
-            icon: 'mdi-poll-box'
+            title: "Analytics",
+            link: "#a",
+            icon: "mdi-poll-box",
           },
           {
-            title: 'Comments',
-            link: '#c',
-            icon: 'mdi-message-reply-text'
+            title: "Comments",
+            link: "#c",
+            icon: "mdi-message-reply-text",
           },
 
           {
-            title: 'Subtitles',
-            link: '#s',
-            icon: 'mdi-subtitles'
+            title: "Subtitles",
+            link: "#s",
+            icon: "mdi-subtitles",
           },
           {
-            title: 'Monetization',
-            link: '#m',
-            icon: 'mdi-currency-usd'
+            title: "Monetization",
+            link: "#m",
+            icon: "mdi-currency-usd",
           },
           {
-            title: 'Audio library',
-            link: '#al',
-            icon: 'mdi-music-box-multiple'
-          }
-        ]
+            title: "Audio library",
+            link: "#al",
+            icon: "mdi-music-box-multiple",
+          },
+        ],
       },
       {
-        header: 'fixed',
+        header: "fixed",
         pages: [
           {
-            title: 'Settings',
-            link: '',
-            icon: 'mdi-cog'
+            title: "Settings",
+            link: "",
+            icon: "mdi-cog",
           },
           {
-            title: 'Send feedback',
-            link: '#sf',
-            icon: 'mdi-history'
+            title: "Send feedback",
+            link: "#sf",
+            icon: "mdi-history",
           },
           {
-            title: 'Creator Studio Classic',
-            link: '#cs',
-            icon: 'mdi-play-box-outline'
-          }
-        ]
-      }
+            title: "Creator Studio Classic",
+            link: "#cs",
+            icon: "mdi-play-box-outline",
+          },
+        ],
+      },
     ],
     dialog: false,
-    settingsDialog: false
+    settingsDialog: false,
   }),
+  mounted() {
+    this.drawer = this.$vuetify.breakpoint.mdAndDown ? false : true;
+  },
   methods: {
     search() {
-      console.log('hello')
+      console.log("hello");
     },
     modal() {
-      this.dialog = true
+      this.dialog = true;
     },
     settingsMoal(title) {
-      if (title !== 'Settings') return
-      this.settingsDialog = true
-    }
+      if (title !== "Settings") return;
+      this.settingsDialog = true;
+    },
   },
-  components: {
-    UploadVideoModal,
-    SettingsModal
-  },
-  mounted() {
-    this.drawer = this.$vuetify.breakpoint.mdAndDown ? false : true
-  }
-}
+};
 </script>
 
 <style lang="scss">

@@ -20,7 +20,7 @@
                   <v-card-title class="pl-0 pb-0">{{
                     video.title
                   }}</v-card-title>
-                  <div class="d-flex flex-wrap justify-space-between" id="btns">
+                  <div id="btns" class="d-flex flex-wrap justify-space-between">
                     <v-card-subtitle
                       class="pl-0 pt-0 pb-0 subtitle-1"
                       style="line-height: 2.4em;"
@@ -82,13 +82,13 @@
                           : video.description
                       }}
                     </p>
-                    <v-btn text @click="show" class="remove-hover-bg"
+                    <v-btn text class="remove-hover-bg" @click="show"
                       >Show More</v-btn
                     >
                   </v-col>
                   <v-col>
                     <p class="mb-0">148 Comments</p>
-                    <input type="text" ref="hello" />
+                    <input ref="hello" type="text" />
                     <v-card class="transparent" flat>
                       <v-list-item three-line class="pl-0">
                         <v-list-item-avatar size="50"
@@ -124,7 +124,7 @@
                       </v-list-item>
                     </v-card>
 
-                    <v-card class="transparent" flat v-for="i in 5" :key="i">
+                    <v-card v-for="i in 5" :key="i" class="transparent" flat>
                       <v-list-item three-line class="pl-0 mt-2">
                         <v-list-item-avatar size="50"
                           ><v-img
@@ -165,7 +165,7 @@
                               >Reply</v-btn
                             >
                           </div>
-                          <div class="d-none" :ref="`${'reply' + i}`">
+                          <div :ref="`${'reply' + i}`" class="d-none">
                             <v-list-item three-line class="pl-0">
                               <v-list-item-avatar class="mt-0" size="40"
                                 ><v-img
@@ -188,7 +188,7 @@
                                   :ref="i + 'btns'"
                                   class="d-inline-block text-right"
                                 >
-                                  <v-btn text @click="hideReply(i)" small
+                                  <v-btn text small @click="hideReply(i)"
                                     >Cancel</v-btn
                                   >
                                   <v-btn
@@ -272,59 +272,59 @@ export default {
     videoLoading: true,
     video: [],
     truncate: true,
-    comment: '',
+    comment: "",
     showCommentBtns: false,
-    repliesInput: {}
+    repliesInput: {},
   }),
+  mounted() {
+    setTimeout(() => {
+      this.loading = false;
+      this.videoLoading = false;
+      this.getVideos();
+    }, 400);
+  },
 
   methods: {
     getVideos() {
       this.video = {
-        channelName: 'Tech Reagan',
-        subscribers: '100k',
-        createdAt: '6 hours ago',
-        views: '200,459',
-        videoUrl: '/video.mp4',
-        title: 'Attendance Management System',
+        channelName: "Tech Reagan",
+        subscribers: "100k",
+        createdAt: "6 hours ago",
+        views: "200,459",
+        videoUrl: "/video.mp4",
+        title: "Attendance Management System",
         description:
-          'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Culpa vel inventore voluptatum reiciendis delectus quibusdam incidunt consequuntur, nostrum aperiam, natus quidem qui corrupti reprehenderit quaerat neque voluptatibus? Ullam, maiores temporibus!'
-      }
+          "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Culpa vel inventore voluptatum reiciendis delectus quibusdam incidunt consequuntur, nostrum aperiam, natus quidem qui corrupti reprehenderit quaerat neque voluptatibus? Ullam, maiores temporibus!",
+      };
     },
     showReply(id) {
-      this.$refs[id][0].classList.toggle('d-none')
+      this.$refs[id][0].classList.toggle("d-none");
     },
     hideReply(id) {
-      this.$refs[`form${id}`][0].reset()
-      this.$refs['reply' + id][0].classList.toggle('d-none')
+      this.$refs[`form${id}`][0].reset();
+      this.$refs["reply" + id][0].classList.toggle("d-none");
     },
     addReply(id) {
-      this.$refs[`form${id}`][0].reset()
-      console.log(this.$refs[`input${id}`][0].$refs.input.value)
+      this.$refs[`form${id}`][0].reset();
+      console.log(this.$refs[`input${id}`][0].$refs.input.value);
     },
     show(event) {
-      if (event.target.innerText === 'SHOW MORE') {
-        this.truncate = false
-        event.target.innerText = 'SHOW LESS'
+      if (event.target.innerText === "SHOW MORE") {
+        this.truncate = false;
+        event.target.innerText = "SHOW LESS";
       } else {
-        this.truncate = true
-        event.target.innerText = 'SHOW MORE'
+        this.truncate = true;
+        event.target.innerText = "SHOW MORE";
       }
     },
-    truncateText(string = '', num) {
+    truncateText(string = "", num) {
       if (string.length <= num) {
-        return string
+        return string;
       }
-      return string.slice(0, num)
-    }
+      return string.slice(0, num);
+    },
   },
-  mounted() {
-    setTimeout(() => {
-      this.loading = false
-      this.videoLoading = false
-      this.getVideos()
-    }, 400)
-  }
-}
+};
 </script>
 
 <style lang="scss">

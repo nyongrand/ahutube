@@ -1,13 +1,13 @@
 <template>
   <v-dialog
+    id="settings"
     v-model="dialog"
     persistent
     transition="fab-transition"
     max-width="800"
-    id="settings"
   >
     <v-card tile>
-      <div class="d-flex justify-space-between mb-5" id="modal-header">
+      <div id="modal-header" class="d-flex justify-space-between mb-5">
         <v-card-title class="py-3">Settings</v-card-title>
 
         <v-btn icon text @click="closeModal">
@@ -133,15 +133,15 @@
           >
             <v-btn text @click="toggleShow">Upload Avatar</v-btn>
             <my-upload
-              field="img"
-              @crop-success="cropSuccess"
               v-model="show"
+              field="img"
               :width="200"
               :height="200"
               :params="params"
               :headers="headers"
               img-format="jpg"
-              langType="en"
+              lang-type="en"
+              @crop-success="cropSuccess"
             ></my-upload>
             <v-responsive
               width="230"
@@ -150,8 +150,8 @@
             >
               <div
                 v-if="!imgDataUrl"
-                class="px-12"
                 id="settings-image-placeholder"
+                class="px-12"
               >
                 <v-icon>mdi-image-plus</v-icon>
               </div>
@@ -172,10 +172,13 @@
 </template>
 
 <script>
-import myUpload from 'vue-image-crop-upload'
+import myUpload from "vue-image-crop-upload";
 export default {
-  name: 'SettingsModal',
-  props: ['openDialog'],
+  name: "SettingsModal",
+  components: {
+    myUpload,
+  },
+  props: ["openDialog"],
   data: function() {
     return {
       // dialog: this.openDialog ? this.openDialog : false,
@@ -190,55 +193,52 @@ export default {
         (value) =>
           !value ||
           value.size < 5000000 ||
-          'Video size should be less than 5 MB!'
+          "Video size should be less than 5 MB!",
       ],
-      categories: ['People', 'Technology', 'Fashion'],
-      visibilty: ['Public', 'Private'],
+      categories: ["People", "Technology", "Fashion"],
+      visibilty: ["Public", "Private"],
       formData: {
-        title: '',
-        description: '',
-        category: '',
-        visibilty: ''
+        title: "",
+        description: "",
+        category: "",
+        visibilty: "",
       },
-      imgDataUrl: '',
+      imgDataUrl: "",
       params: {
-        token: '123456798',
-        name: 'avatar'
+        token: "123456798",
+        name: "avatar",
       },
       headers: {
-        smail: '*_~'
-      }
-    }
+        smail: "*_~",
+      },
+    };
   },
   computed: {
     dialog() {
-      return this.openDialog
-    }
+      return this.openDialog;
+    },
   },
   methods: {
     submit() {
       // if (this.$route.name === 'Dashboard')
       //   return this.$router.push('/studio/videos')
-      console.log('submittied')
-      this.closeModal()
+      console.log("submittied");
+      this.closeModal();
     },
     closeModal() {
-      this.$emit('closeDialog')
+      this.$emit("closeDialog");
     },
 
     toggleShow() {
-      this.show = !this.show
+      this.show = !this.show;
     },
     cropSuccess(imgDataUrl, field) {
-      console.log('-------- crop success --------')
-      console.log(field)
-      this.imgDataUrl = imgDataUrl
-    }
+      console.log("-------- crop success --------");
+      console.log(field);
+      this.imgDataUrl = imgDataUrl;
+    },
   },
-  components: {
-    myUpload
-  }
-}
+};
 </script>
 
 <style lang="scss">

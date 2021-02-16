@@ -7,9 +7,9 @@
           <v-tooltip bottom>
             <template v-slot:activator="{ on: tooltip }">
               <v-btn
-                @click="dialog = true"
                 class="mr-4 white"
                 icon
+                @click="dialog = true"
                 v-on="{ ...tooltip }"
                 ><v-icon size="25" class="small">mdi-upload</v-icon></v-btn
               >
@@ -168,10 +168,7 @@
         </v-col>
       </v-row>
     </v-container>
-    <upload-video-modal
-      :open-dialog="dialog"
-      v-on:closeDialog="dialog = false"
-    />
+    <upload-video-modal :open-dialog="dialog" @closeDialog="dialog = false" />
     <subscribers-modal
       :open-dialog="subscribersDialog"
       @closeDialog="subscribersDialog = false"
@@ -180,20 +177,20 @@
 </template>
 
 <script>
-import UploadVideoModal from '@/components/UploadVideoModal'
-import SubscribersModal from '@/components/SubscribersModal'
+import UploadVideoModal from "@/components/UploadVideoModal";
+import SubscribersModal from "@/components/SubscribersModal";
 export default {
+  components: {
+    UploadVideoModal,
+    SubscribersModal,
+  },
   data: () => ({
     loading: true,
     dialog: false,
-    subscribersDialog: false
+    subscribersDialog: false,
   }),
-  components: {
-    UploadVideoModal,
-    SubscribersModal
-  },
-  mounted() {}
-}
+  mounted() {},
+};
 </script>
 
 <style lang="scss">

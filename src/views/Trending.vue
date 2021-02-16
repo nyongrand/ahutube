@@ -3,12 +3,12 @@
     <v-container fluid>
       <v-row>
         <v-col
+          v-for="i in 10"
+          :key="i"
           cols="8"
           sm="7"
           md="10"
           lg="10"
-          v-for="i in 10"
-          :key="i"
           class="mx-lg-0 mx-md-0 mx-sm-auto mx-auto"
         >
           <!-- <v-container> -->
@@ -62,16 +62,16 @@
 
 <script>
 export default {
-  name: 'Home',
+  name: "Home",
   data: () => ({
-    loading: true
+    loading: true,
   }),
   mounted() {
     setTimeout(() => {
-      this.loading = false
-    }, 3000)
-  }
-}
+      this.loading = false;
+    }, 3000);
+  },
+};
 </script>
 
 <style lang="scss">
