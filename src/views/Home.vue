@@ -4,7 +4,7 @@
       <h3 class="headline font-weight-medium">Recommended</h3>
       <v-row>
         <v-col
-          v-for="i in loading ? 10 : 12"
+          v-for="i in recomendations.length"
           :key="i"
           cols="12"
           sm="6"
@@ -15,46 +15,9 @@
           <v-skeleton-loader type="card-avatar" :loading="loading">
             <video-card
               :card="{ maxWidth: 350 }"
-              :video="video"
-              :channel="channel"
+              :channel="getChannel(recomendations[i - 1].uploaderId)"
+              :video="recomendations[i - 1]"
             ></video-card>
-            <!-- <v-card
-              class="content-bg card mx-auto"
-              max-width="350"
-              flat
-              tile
-              router
-              to="/watch/12"
-            >
-              <v-img
-                src="https://cdn.vuetifyjs.com/images/cards/sunshine.jpg"
-                height="200px"
-              ></v-img>
-              <v-row no-gutters>
-                <v-col cols="2">
-                  <v-list-item class="pl-0 pt-3" router to="/channels/12">
-                    <v-list-item-avatar color="grey darken-3">
-                      <v-img
-                        class="elevation-6"
-                        src="https://randomuser.me/api/portraits/men/1.jpg"
-                      ></v-img>
-                    </v-list-item-avatar>
-                  </v-list-item>
-                </v-col>
-                <v-col>
-                  <v-card-title class="pl-2 pt-3 subtitle-1 font-weight-bold">
-                    Top western road trips
-                  </v-card-title>
-
-                  <v-card-subtitle class="pl-2 pb-0">
-                    1,000 miles of wonder
-                  </v-card-subtitle>
-                  <v-card-subtitle class="pl-2 pt-0">
-                    9.6k views<v-icon>mdi-circle-small</v-icon>6 hours ago
-                  </v-card-subtitle>
-                </v-col>
-              </v-row>
-            </v-card> -->
           </v-skeleton-loader>
         </v-col>
       </v-row>
@@ -63,6 +26,7 @@
 </template>
 
 <script>
+import axios from "axios";
 import videoCard from "@/components/VideoCard";
 
 export default {
@@ -72,22 +36,41 @@ export default {
   },
   data: () => ({
     loading: true,
-    video: {
-      url: "/watch/12",
-      thumb: "https://cdn.vuetifyjs.com/images/cards/sunshine.jpg",
-      title: "Top western road trips",
-      views: "9.6k",
-      createdAt: "6 hours ago",
-    },
-    channel: {
-      url: "/channels/12",
-      avatar: "https://randomuser.me/api/portraits/men/1.jpg",
-    },
+    channels: [],
+    recomendations: [],
   }),
-  mounted() {
-    setTimeout(() => {
-      this.loading = false;
-    }, 3000);
+
+  async mounted() {
+    // load channels list
+    const res1 = await axios.get(`/data/channels.json`);
+    this.channels = res1.data;
+
+    // get all video list
+    const res2 = await Promise.all(
+      this.channels.map((x) => axios.get(`/data/channels/${x.id}/videos.json`))
+    );
+
+    // get random video recomendations
+    for (let i = 0; i <= 12; i++) {
+      const c = this.getRandomInt(this.channels.length);
+      const channelVideos = res2[c].data;
+
+      const v = this.getRandomInt(channelVideos.length);
+      this.recomendations.push(channelVideos[v]);
+    }
+
+    this.loading = false;
+  },
+
+  methods: {
+    getChannel(id) {
+      return this.channels.find((x) => x.id === id);
+    },
+
+    getRandomInt(max) {
+      max = Math.floor(max);
+      return Math.floor(Math.random() * max);
+    },
   },
 };
 </script>
