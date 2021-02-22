@@ -2,11 +2,26 @@
   <nav id="navbar">
     <v-app-bar class="white" flat app clipped-left>
       <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
-      <v-toolbar-title class="font-weight-bold"
-        ><router-link to="/" class="black--text" style="text-decoration: none"
-          >VueTube</router-link
-        ></v-toolbar-title
-      >
+      <div class="d-flex align-center">
+        <router-link to="/" class="black--text" style="text-decoration: none">
+          <v-img
+            :src="logo"
+            alt="Logo AhuTube"
+            class="shrink mr-2"
+            contain
+            transition="scale-transition"
+            width="32"
+            @dblclick="$router.push('/')"
+          />
+        </router-link>
+
+        <v-toolbar-title class="font-weight-bold">
+          <router-link to="/" class="black--text" style="text-decoration: none">
+            AhuTube
+          </router-link>
+        </v-toolbar-title>
+      </div>
+
       <v-spacer></v-spacer>
       <v-text-field
         v-model="searchText"
@@ -187,6 +202,7 @@
 <script>
 export default {
   data: () => ({
+    logo: require("@/assets/logo.png"),
     drawer: false,
     items: [
       {
