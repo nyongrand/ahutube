@@ -8,8 +8,10 @@
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
+    "@mdi/font": "^5.9.55",
     "core-js": "^3.6.4",
     "plyrue": "^2.1.6",
+    "roboto-fontface": "*",
     "vee-validate": "^3.2.5",
     "video.js": "^7.7.5",
     "vue": "^2.6.11",

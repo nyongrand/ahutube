@@ -11,6 +11,8 @@ import {
   setInteractionMode,
 } from "vee-validate";
 import Vuebar from "vuebar";
+import "roboto-fontface/css/roboto/roboto-fontface.css";
+import "@mdi/font/css/materialdesignicons.min.css";
 
 setInteractionMode("eager");
 
