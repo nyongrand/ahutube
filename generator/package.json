@@ -1,0 +1,11 @@
+{
+  "name": "ahutube-generator",
+  "version": "1.0.0",
+  "description": "Generate ahutube data",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "nyongrand",
+  "license": "ISC"
+}
