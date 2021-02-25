@@ -12,7 +12,7 @@
       <v-col v-if="card.type != 'noAvatar'" cols="2">
         <v-list-item class="pl-0 pt-3" router :to="channel.id">
           <v-list-item-avatar color="grey darken-3">
-            <v-img class="elevation-6" :src="channel.avatar"></v-img>
+            <v-img class="elevation-6" :src="channelAvatar"></v-img>
           </v-list-item-avatar>
         </v-list-item>
       </v-col>
@@ -53,7 +53,10 @@ export default {
 
   computed: {
     thumbnail() {
-      return `/data/thumbnail/${this.video.thumbnail}`;
+      return `${process.env.BASE_URL}data/thumbnail/${this.video.thumbnail}`;
+    },
+    channelAvatar() {
+      return `${process.env.BASE_URL}data/avatar/${this.channel.id}.jpg`;
     },
   },
 };

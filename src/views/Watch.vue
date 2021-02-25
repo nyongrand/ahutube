@@ -12,11 +12,7 @@
                 large
               >
                 <v-responsive>
-                  <video
-                    controls
-                    :poster="`/data/thumbnail/${video.thumbnail}`"
-                    autoplay="muted"
-                  >
+                  <video controls :poster="thumbnailUrl" autoplay="muted">
                     <source :src="videoUrl" type="video/mp4" />
                   </video>
                 </v-responsive>
@@ -55,9 +51,7 @@
                     <v-card class="transparent" flat>
                       <v-list-item three-line>
                         <v-list-item-avatar size="50"
-                          ><v-img
-                            :src="`/data/avatar/${channel.id}.jpg`"
-                          ></v-img
+                          ><v-img :src="avatarUrl"></v-img
                         ></v-list-item-avatar>
                         <v-list-item-content class="align-self-auto">
                           <v-list-item-title class="font-weight-medium mb-1">{{
@@ -118,7 +112,7 @@
                         <!-- <v-responsive max-height="100%"> -->
                         <v-img
                           class="align-center"
-                          :src="`/data/thumbnail/${v.thumbnail}`"
+                          :src="`${publicPath}data/thumbnail/${v.thumbnail}`"
                         >
                         </v-img>
                         <!-- </v-responsive> -->
@@ -168,11 +162,18 @@ export default {
     comment: "",
     showCommentBtns: false,
     repliesInput: {},
+    publicPath: process.env.BASE_URL,
   }),
 
   computed: {
     videoUrl() {
       return `http://localhost:5000/${this.channel.folder}/${this.video.filename}`;
+    },
+    thumbnailUrl() {
+      return `${this.publicPath}data/thumbnail/${this.video.thumbnail}`;
+    },
+    avatarUrl() {
+      return `${this.publicPath}data/avatar/${this.channel.id}.jpg`;
     },
   },
 
@@ -197,21 +198,23 @@ export default {
       this.videoLoading = false;
     },
     async getVideo(id) {
-      const res = await axios.get(`/data/videos/${id}.json`);
+      const res = await axios.get(`${this.publicPath}data/videos/${id}.json`);
       return res.data;
     },
     async getChannel(id) {
-      const res = await axios.get(`/data/channels/${id}.json`);
+      const res = await axios.get(`${this.publicPath}data/channels/${id}.json`);
       return res.data;
     },
     async getVideoRecomendations() {
       // load channels list
-      const res1 = await axios.get(`/data/channels.json`);
+      const res1 = await axios.get(`${this.publicPath}data/channels.json`);
       const channels = res1.data;
 
       // get all video list
       const res2 = await Promise.all(
-        channels.map((x) => axios.get(`/data/channels/${x.id}/videos.json`))
+        channels.map((x) =>
+          axios.get(`${this.publicPath}data/channels/${x.id}/videos.json`)
+        )
       );
 
       // get random video recomendations
@@ -235,7 +238,7 @@ export default {
     },
     addReply(id) {
       this.$refs[`form${id}`][0].reset();
-      console.log(this.$refs[`input${id}`][0].$refs.input.value);
+      // console.log(this.$refs[`input${id}`][0].$refs.input.value);
     },
     show(event) {
       if (event.target.innerText === "SHOW MORE") {

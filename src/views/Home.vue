@@ -34,6 +34,7 @@ export default {
   components: {
     videoCard,
   },
+
   data: () => ({
     loading: true,
     channels: [],
@@ -42,12 +43,14 @@ export default {
 
   async mounted() {
     // load channels list
-    const res1 = await axios.get(`/data/channels.json`);
+    const res1 = await axios.get(`${process.env.BASE_URL}data/channels.json`);
     this.channels = res1.data;
 
     // get all video list
     const res2 = await Promise.all(
-      this.channels.map((x) => axios.get(`/data/channels/${x.id}/videos.json`))
+      this.channels.map((x) =>
+        axios.get(`${process.env.BASE_URL}data/channels/${x.id}/videos.json`)
+      )
     );
 
     // get random video recomendations
