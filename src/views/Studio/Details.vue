@@ -145,15 +145,15 @@ export default {
   mounted() {},
   methods: {
     submit() {
-      console.log("submittied");
+      // console.log("submittied");
       this.closeModal();
     },
     toggleShow() {
       this.show = !this.show;
     },
-    cropSuccess(imgDataUrl, field) {
-      console.log("-------- crop success --------");
-      console.log(field);
+    cropSuccess(imgDataUrl /*, field*/) {
+      // console.log("-------- crop success --------");
+      // console.log(field);
       this.imgDataUrl = imgDataUrl;
     },
   },
