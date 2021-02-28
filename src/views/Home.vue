@@ -54,7 +54,7 @@ export default {
     );
 
     // get random video recomendations
-    for (let i = 0; i <= 12; i++) {
+    for (let i = 0; i < 16; i++) {
       const c = this.getRandomInt(this.channels.length);
       const channelVideos = res2[c].data;
 
