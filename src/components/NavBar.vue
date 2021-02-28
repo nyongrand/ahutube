@@ -67,7 +67,7 @@
         <template v-slot:activator="{ on }">
           <v-btn icon v-on="on"> <v-icon size="25">mdi-apps</v-icon></v-btn>
         </template>
-        <span>VueTube apps</span>
+        <span>AhuTube apps</span>
       </v-tooltip>
       <v-tooltip bottom>
         <template v-slot:activator="{ on }">
@@ -114,7 +114,7 @@
               <v-list-item-icon>
                 <v-icon>mdi-youtube-studio</v-icon>
               </v-list-item-icon>
-              <v-list-item-title>VueTube Studio</v-list-item-title>
+              <v-list-item-title>AhuTube Studio</v-list-item-title>
             </v-list-item>
             <v-list-item router to="/signin">
               <v-list-item-icon>
@@ -145,7 +145,7 @@
               class="mr-5"
               @click="drawer = !drawer"
             ></v-app-bar-nav-icon>
-            <v-toolbar-title class="font-weight-bold">VueTube</v-toolbar-title>
+            <v-toolbar-title class="font-weight-bold">AhuTube</v-toolbar-title>
           </v-list-item>
           <v-divider class="hidden-lg-and-up"></v-divider>
           <div v-for="parentItem in items" :key="parentItem.header">
@@ -275,10 +275,10 @@ export default {
         ],
       },
       {
-        header: "MORE FROM VUETUBE",
+        header: "MORE FROM AHUTUBE",
         pages: [
           {
-            title: "VueTube Premium",
+            title: "AhuTube Premium",
             link: "#vp",
             icon: "mdi-youtube",
           },
