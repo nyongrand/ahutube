@@ -52,7 +52,12 @@
 <script>
 export default {
   name: "SubscribersModal",
-  props: ["openDialog"],
+  props: {
+    openDialog: {
+      type: Boolean,
+      required: true,
+    },
+  },
   data: function() {
     return {
       headers: [

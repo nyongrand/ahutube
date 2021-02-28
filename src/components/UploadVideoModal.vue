@@ -208,7 +208,12 @@ export default {
   components: {
     myUpload,
   },
-  props: ["openDialog"],
+  props: {
+    openDialog: {
+      type: Boolean,
+      required: true,
+    },
+  },
   data: function() {
     return {
       // dialog: this.openDialog ? this.openDialog : false,
