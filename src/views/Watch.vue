@@ -27,7 +27,7 @@
                     >
                       {{ video.viewCount.toLocaleString() }} views<v-icon
                         >mdi-circle-small</v-icon
-                      >{{ video.createdAt }}
+                      >{{ getTimeAgo(video.uploadDate) }}
                     </v-card-subtitle>
                     <v-card-actions class="pt-0 pl-0 grey--text">
                       <v-btn text
@@ -132,7 +132,8 @@
                           >
                             {{ v.uploader }}<br />
                             {{ v.views.toLowerCase() }}
-                            views<v-icon>mdi-circle-small</v-icon>6 hours ago
+                            views<v-icon>mdi-circle-small</v-icon>
+                            {{ getTimeAgo(v.uploadDate) }}
                           </v-card-subtitle>
                         </div>
                       </v-col>
@@ -150,6 +151,7 @@
 
 <script>
 import axios from "axios";
+import * as timeago from "timeago.js";
 
 export default {
   data: () => ({
@@ -228,6 +230,9 @@ export default {
       }
 
       return recomendations;
+    },
+    getTimeAgo(date) {
+      return timeago.format(date);
     },
     showReply(id) {
       this.$refs[id][0].classList.toggle("d-none");

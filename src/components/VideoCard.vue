@@ -26,8 +26,7 @@
         </v-card-subtitle>
 
         <v-card-subtitle class="pl-2 pt-0">
-          {{ video.views }} views<v-icon>mdi-circle-small</v-icon
-          >{{ video.uploadDate }}
+          {{ video.views }} views<v-icon>mdi-circle-small</v-icon>{{ timeAgo }}
         </v-card-subtitle>
       </v-col>
     </v-row>
@@ -35,6 +34,8 @@
 </template>
 
 <script>
+import * as timeago from "timeago.js";
+
 export default {
   props: {
     card: {
@@ -57,6 +58,9 @@ export default {
     },
     channelAvatar() {
       return `${process.env.BASE_URL}data/avatar/${this.channel.id}.jpg`;
+    },
+    timeAgo() {
+      return timeago.format(this.video.uploadDate);
     },
   },
 };
